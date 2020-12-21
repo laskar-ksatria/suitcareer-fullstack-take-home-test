@@ -13,5 +13,10 @@ const ticketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
     },
+    transactions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Trasaction'
+    }],
+    
     
 })

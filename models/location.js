@@ -3,7 +3,20 @@ const mongoose = require('mongoose');
 const locationSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Location name cannot be empty"]
+        required: [true, "Location name cannot be empty"],
+        validate: {
+            validator: function (value) {
+                this.model('Location').findOne({name: value})
+                    .then(location => {
+                        if (location) {
+                            return false;
+                        }else {
+                            return true;
+                        }
+                    })
+            },
+            message: props => `${props.value} already added`
+        }
     },
     event: [{
         type: mongoose.Schema.Types.ObjectId,
