@@ -13,10 +13,11 @@ const ticketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
     },
-    transactions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Trasaction'
-    }],
-    
-    
+    ticket_type: {
+        type: String,
+    }
 })
+
+const ticket = mongoose.model('Ticket', ticketSchema);
+
+module.exports = ticket;

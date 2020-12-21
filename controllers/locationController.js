@@ -3,7 +3,7 @@ const Location = require('../models/location');
 class LocationController {
 
     static readAll(req,res,next) {
-        Location.find({})
+        Location.find({}).populate('events')
             .then(locations => {
                 res.status(200).json(locations)
             }) 
@@ -13,7 +13,7 @@ class LocationController {
     static create(req,res,next) {
         let { name } = req.body;
         let formatingName = name.trim().toLowerCase();
-        Location.create({name})
+        Location.create({name: formatingName})
             .then(location => {
                 res.status(200).json({message: "Location has been added", location})
             })

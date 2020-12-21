@@ -6,7 +6,7 @@ const locationSchema = new mongoose.Schema({
         required: [true, "Location name cannot be empty"],
         validate: {
             validator: function (value) {
-                this.model('Location').findOne({name: value})
+                return this.model('Location').findOne({name: value})
                     .then(location => {
                         if (location) {
                             return false;
@@ -18,9 +18,9 @@ const locationSchema = new mongoose.Schema({
             message: props => `${props.value} already added`
         }
     },
-    event: [{
+    events: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Event'
+        ref: 'Event',
     }],
     schedules: [{
         type: mongoose.Schema.Types.ObjectId,
