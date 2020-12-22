@@ -19,7 +19,7 @@ class EventController {
             let startDate = new Date(start);
             let endDate = new Date(end);
 
-            let findLocation = await Location.findOne({name: formatingLocation})
+            let findLocation = await Location.findOne({location: formatingLocation})
             if (findLocation) {
                 let findSameEvent = await MyEvent.findOne({name: formatingName, location: formatingLocation})
                 if (findSameEvent) {
@@ -30,7 +30,6 @@ class EventController {
                     let updateEvent = await MyEvent.findOneAndUpdate(
                         {_id: newEvent.id}, {schedule: newSchedule.id}, 
                         {omitUndefined: true, new: true})
-                    console.log(updateEvent)
                     let newUpdateEvent = await MyEvent.findOne({_id: updateEvent.id}).populate('schedule')
                     res.status(202).json({message: "Event has been added", newEvent: newUpdateEvent})
                     await Location.updateOne({_id: findLocation.id}, {$push: {events: newEvent.id}}, {omitUndefined: true})

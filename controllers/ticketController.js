@@ -18,7 +18,13 @@ class TicketController {
             path: "events",
             populate: {
                 path: "tickets",
-                mododel: "Ticket"
+                model: "Ticket",
+            }
+        }).populate({
+            path: 'events',
+            populate: {
+                path: 'schedule',
+                model: "Schedule"
             }
         })
         .then(data => res.status(200).json(data))
@@ -28,9 +34,11 @@ class TicketController {
     static async create(req,res,next) {
         let { event_name, quota, location, price, ticket_type } = req.body;
         let formatingLocation = location.trim().toLowerCase();
+        let formatingEventName = event_name.trim().toLowerCase();
+        let formatingTicketType = ticket_type.trim().toLowerCase();
         let eventLocation;
         let newTicket
-        Location.findOne({name: formatingLocation}).populate('events')
+        Location.findOne({location: formatingLocation}).populate('events')
             .then(findLocation => {
                 if (findLocation) {
                     eventLocation= findLocation;
@@ -38,12 +46,12 @@ class TicketController {
                     if (events) {
                         let findEvent;
                         events.forEach(item => {
-                            if (item.name === event_name) {
+                            if (item.name === formatingEventName) {
                                 findEvent = item;
                             }
                         })  
                         if (findEvent) {
-                            Ticket.create({price, quota, event: findEvent.id, ticket_type})
+                            Ticket.create({price, quota, event: findEvent.id, ticket_type: formatingTicketType})
                                 .then(ticket => {
                                     let { _id } = ticket;
                                     newTicket = ticket
