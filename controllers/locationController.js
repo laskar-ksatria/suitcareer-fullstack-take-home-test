@@ -11,8 +11,8 @@ class LocationController {
     };
 
     static create(req,res,next) {
-        let { name } = req.body;
-        let formatingName = name.trim().toLowerCase();
+        let { location} = req.body;
+        let formatingName = location.trim().toLowerCase();
         Location.create({location: formatingName})
             .then(location => {
                 res.status(200).json({message: "Location has been added", location})

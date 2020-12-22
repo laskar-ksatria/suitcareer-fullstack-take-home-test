@@ -1,12 +1,11 @@
-### GET ALL LOCATIONS
-GET http://localhost:3100/delete-location
+
 
 ### CREATE LOCATION
 POST http://localhost:3100/location/create
 Content-Type: application/json
 
 {
-    "name": "Jakarta"
+    "location": "Jakarta"
 }
 
 ### CREATE EVENT
@@ -34,19 +33,3 @@ Content-Type: application/json
 
 ### EVENT GET INFO
 GET http://localhost:3100/event/get_info
-
-### CREATE TICKET
-POST http://localhost:3100/transaction/purchase
-Content-Type: application/json
-
-{
-    "username": "laskarks",
-    "event_name": "pameran picasso",
-    "location": "jakarta",
-    "tickets_info": "[
-        {
-            
-        }
-    ]"
-
-}
