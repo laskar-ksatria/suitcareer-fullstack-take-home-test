@@ -6,7 +6,7 @@ const locationSchema = new mongoose.Schema({
         required: [true, "Location name cannot be empty"],
         validate: {
             validator: function (value) {
-                return this.model('Location').findOne({name: value})
+                return this.model('Location').findOne({location: value})
                     .then(location => {
                         if (location) {
                             return false;

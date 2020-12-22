@@ -9,4 +9,11 @@ Router.use('/event', eventRouter);
 Router.use('/location', locationRouter);
 Router.use('/transaction', transactionRouter);
 
+const Location = require('../models/location')
+
+Router.get('/dele', (req, res, next) => {
+    Location.deleteMany({})
+        .then(() => res.send("Oke"))
+})
+
 module.exports = Router;
