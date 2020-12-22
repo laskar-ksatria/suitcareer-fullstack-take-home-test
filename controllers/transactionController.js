@@ -5,9 +5,8 @@ const Ticket = require('../models/ticket')
 
 class TrasactionController {
 
-    static readMe(req, res, next) {
-        let { username } = req.body
-        Transaction.find({username}).populate('event')
+    static readInfo(req, res, next) {
+        Transaction.find({}).populate('event')
             .then(value => res.status(200).json(value))
             .catch(next)
     };
@@ -44,43 +43,7 @@ class TrasactionController {
         } catch (error) {
             next(error)
         }
-        // try {
-        //     let LocEvent = await Event.findOne({ name: formatingEventName, location: formatingLocation })
-        //     if (allEvents) {
-        //         console.log(allEvents);
-        //         // let userTransaction = [];
-        //         // for (let i = 0; i < allEvents.length; i++) {
-        //         //     let { ticket_type, price, quota, _id, name } = allEvents[i]
-        //         //     for (let j = 0; j < tickets_info.length; j++) {
-        //                 // let item = tickets_info[j]
-        //                 // let total = Number(item.quantity) * Number(price);
-        //                 // if (item.ticket_type === ticket_type) {
-        //                 //     if (quota > item.quantity) {
-        //                 //        let myTrade = await Transaction.create({ username,  total, quantity: item.quantity, event: _id})
-        //                 //         userTransaction.push(myTrade);
-        //                 //        await Event.updateOne({name, ticket_type}, {$inc: {quota: -item.quantity}}, {omitUndefined: true})
-        //                 //     };
-        //                 // };
-        //             // };
-        //         };
-
-        //         res.status(202).json({message: "Transaction has been maded"});
-
-        //     } else {
-        //         next({ message: "Event not found, please fill correctly" })
-        //     }
-        // } catch (error) {
-        //     next(error)
-        // }
     };
-    // [
-    //     {
-    //         ticket_type: "",
-    //         quantity: "",
-
-    //     }
-    // ]
-
     static readInfo(req, res, next) {
 
     }
